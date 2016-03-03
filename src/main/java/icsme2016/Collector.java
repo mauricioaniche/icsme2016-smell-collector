@@ -69,6 +69,10 @@ public class Collector implements CommitVisitor {
 	}
 	
 	private void processChangeMetrics(SCMRepository repo, Commit commit) {
+		
+		if(fixADefect(commit)) log.info("Commit fixes a bug");
+		if(refactoring(commit)) log.info("Commit has a refactoring");
+		
 		for(Modification m : commit.getModifications()) {
 			if(!m.fileNameEndsWith(".java")) continue;
 			
