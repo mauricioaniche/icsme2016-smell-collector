@@ -62,7 +62,6 @@ public class Collector implements CommitVisitor {
 			processChangeMetrics(repo, commit);
 		}
 
-		// it might end without closing the last chunk, so we need to invoke it at the end
 	}
 
 	private String fullPath(String repo, String file) {
@@ -117,7 +116,7 @@ public class Collector implements CommitVisitor {
 			
 			this.currentClasses = convert(commit.getHash(), ckReport);
 			calculateLOC();
-			detectSmells(repo);
+			detectSmells(repo, commit);
 			
 		} catch(Exception e) {
 			log.error("Something went bad with git", e);
@@ -131,11 +130,14 @@ public class Collector implements CommitVisitor {
 		this.currentClasses = new ArrayList<>();
 	}
 
-	private void detectSmells(SCMRepository repo) {
+	private void detectSmells(SCMRepository repo, Commit commit) {
+		log.info("Searching for code smells in " + commit.getHash());
 		Repository smellRepo = runSmellyCat(repo);
 
 		for(SmellyClass smelly : smellRepo.all()) {
 			if(smelly.hasAnySmell()) {
+				log.info(smelly.getFile() + " has smells");
+				
 				Optional<ClassInfo> found = 
 						currentClasses.stream().filter(c -> c.getPath().equals(smelly.getFile())).findFirst();
 				

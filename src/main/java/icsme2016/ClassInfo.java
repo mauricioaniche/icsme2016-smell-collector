@@ -1,5 +1,6 @@
 package icsme2016;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.smellycat.analysis.smells.SmellDescription;
@@ -23,6 +24,7 @@ public class ClassInfo {
 		this.path = ck.getFile();
 		this.release = release;
 		this.role = ck.getSpecific("role");
+		this.smells = new HashSet<>();
 	}
 	
 	public CKNumber getCk() {

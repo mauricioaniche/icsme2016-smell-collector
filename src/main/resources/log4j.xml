@@ -29,6 +29,11 @@
         <appender-ref ref="main"/>
     </category>
 
+    <category name="br.com.aniche.ck">
+        <priority value="ERROR"/>
+        <appender-ref ref="main"/>
+    </category>
+
     <category name="/">
         <priority value="INFO"/>
         <appender-ref ref="main"/>
