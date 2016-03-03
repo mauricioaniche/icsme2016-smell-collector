@@ -102,7 +102,7 @@ public class Collector implements CommitVisitor {
 	}
 
 	private boolean fixADefect(Commit commit) {
-		return (commit.getMsg().contains("fix") && commit.getMsg().contains("postfix") && commit.getMsg().contains("prefix")) 
+		return (commit.getMsg().contains("fix") && !commit.getMsg().contains("postfix") && !commit.getMsg().contains("prefix")) 
 			|| commit.getMsg().contains("bug");
 	}
 
