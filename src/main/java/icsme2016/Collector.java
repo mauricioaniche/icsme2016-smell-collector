@@ -78,7 +78,8 @@ public class Collector implements CommitVisitor {
 					currentClasses.stream().filter(c -> c.getPath().equals(fullPath(repo.getPath(), fileName))).findFirst();
 			
 			if(!found.isPresent()) {
-				log.info("class was not present in the release start: " + m.getOldPath());
+				log.info("class was not present in the release started: " + fileName);
+				log.info(m);
 				continue;
 			}
 			
