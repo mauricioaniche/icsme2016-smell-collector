@@ -77,14 +77,14 @@ public class Collector implements CommitVisitor {
 					currentClasses.stream().filter(c -> c.getPath().equals(fullPath(repo.getPath(), fileName))).findFirst();
 			
 			if(!found.isPresent()) {
-				log.info("class was not present in the release started: " + fileName);
-				log.info(m);
+				log.debug("class was not present in the release started: " + fileName);
+				log.debug(m);
 				continue;
 			}
 			
 			ClassInfo theClass = found.get();
 			if(m.getType() == ModificationType.RENAME) {
-				log.info("Rename: " + m.getOldPath() + " to " + m.getNewPath());
+				log.debug("Rename: " + m.getOldPath() + " to " + m.getNewPath());
 				theClass.setPath(m.getNewPath());
 			}
 
@@ -92,7 +92,7 @@ public class Collector implements CommitVisitor {
 			if(fixADefect(commit)) theClass.hadABug();
 			if(refactoring(commit)) theClass.wasRefactored();
 			
-			log.info(theClass);
+			log.debug(theClass);
 		}
 		
 	}

@@ -46,6 +46,7 @@ public class ICSME2016Study implements Study {
 	}
 
 	private void printResults(List<ClassInfo> result) {
+		ps.println("file,role,release,loc,cbo,wmc,nom,rfc,lcom,modifications,refactorings,bugs,smell,description");
 		for(ClassInfo ci : result) {
 			
 			if(!ci.hasSmells()) printLine(ci, "no", "no");
